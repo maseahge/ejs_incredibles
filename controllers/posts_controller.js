@@ -24,7 +24,8 @@ posts.new = function(req, res) {
 
     collection.insert({
       "title" : title,
-      "category" : category
+      "category" : category,
+      "content" : content
     }, function (err, doc) {
       if (err) {
         // If it failed, return error
@@ -41,6 +42,7 @@ posts.create = function(req, res) {
   var post = new Post();
   post.title = req.body.title;
   post.category = req.body.category;
+  post.content = req.body.content;
 
   post.save(function(err){
     if(err){
@@ -60,7 +62,12 @@ posts.show = function(req, res) {
 };
 
 posts.edit = function(req, res) {
-
+  Post.findById(req.params.id, function(err, post) {
+    if (err) {
+      throw err;
+    }
+    res.render('posts-show', {post: post});
+  });
 };
 
 posts.update = function(req, res) {
