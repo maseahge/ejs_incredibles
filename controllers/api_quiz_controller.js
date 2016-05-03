@@ -3,8 +3,10 @@ var questions = {}
 
 questions.index = function(req, res) {
   Question.find({}, function(err, questions) {
-    if (err) return res.json(err);
-    res.json(questions);
+    if (err) {
+      throw err;
+    }
+    res.render('quiz_index', {questions: questions});
   });
 }
 
