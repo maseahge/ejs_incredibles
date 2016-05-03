@@ -7,6 +7,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+//Quiz routes
+var apiQuizRoute = require('./routes/api_quiz_router');
+
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
@@ -80,7 +84,6 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var postRoutes = require('./routes/posts');
@@ -150,6 +153,9 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+
+// Handling Quiz API requests
+app.use('/api/quiz', apiQuizRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
