@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <ul id="messages">
+    </ul>
+
+
+    <textarea rows="4" cols="50" id="message"></textarea>
+    <button id="send-message">Send</button>
+
+	<script src="javascripts/sketch.js"></script>
+	<script src="/libraries/p5.js"></script>
+</body>
+</html>

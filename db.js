@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var mongooseURL = process.env.MONGO_URL || 'mongodb://localhost/ejs_incredibles_dev';
+var mongooseURL = process.env.MONGODB_URI || 'mongodb://localhost/ejs_incredibles';
+
 mongoose.connect(mongooseURL);
 
 module.exports = mongoose;
