@@ -34,6 +34,10 @@ router.get('/chat', function(req, res) {
   res.render('chat')
 });
 
+router.get('/code_practice', function(req, res) {
+  res.render('code_practice')
+});
+
 router.get('/sign_up', function(req,res,next){
   res.render('sign_up');
 });
