@@ -7,11 +7,17 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+//Quiz routes
+var apiQuizRoute = require('./routes/api_quiz_router');
+
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 var db = require('./db');
 var User = require('./models/user');
+var methodOverride = require('method-override')
+
 
 
 
@@ -53,11 +59,10 @@ passport.use(new GitHubStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
 
-      console.log(profile);
+      // console.log(profile);
         User.findOne({'githubUsername': profile.username}, function(err, user) {
         if (err) return done(err);
         if (user) {
-          console.log(user);
           return done(null, user);
         } else {
           var newUser = new User();
@@ -75,11 +80,10 @@ passport.use(new GitHubStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      return done(null, profile);
+
     });
   }
 ));
-
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -106,6 +110,8 @@ app.use(cookieParser());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(methodOverride('_method'));
+
 
 
 // Initialize Passport!  Also use passport.session() middleware, to support
@@ -142,7 +148,8 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+
+    res.redirect('/logged_in');
   });
 
 app.get('/logout', function(req, res){
@@ -150,6 +157,9 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+
+// Handling Quiz API requests
+app.use('/api/quiz', apiQuizRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
