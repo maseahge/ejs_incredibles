@@ -9,7 +9,17 @@
     <form method="post" action="/posts">
       <input type="text" name="title" placeholder="title">
       <br>
-      <input name="category" placeholder="category"></input>
+      <select id="category" name="category">
+      <%
+      var options = [ "new jobs", "brag", "whine", "shoutout", "ramble", "misc" ];
+      for ( var i = 0; i < options.length; i++ )
+      {
+          var selected = ( options[i] ) ? "selected" : "";
+          %><option value="<%=options[ i ] %>" <%=selected %>><%=options[i] %></option><%
+      }
+      %>
+      </select>
+
       <br>
       <textarea name="content" placeholder="content" rows=20 cols=40></textarea>
       <br>
