@@ -2,16 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var User = require('../models/user');
+var usersController = require('../controllers/users_controller');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  User.find({}, function(err, users){
-    if(err){
-      throw err;
-    }
-    res.render('index', { title: 'Express', users: users});
-  });
-});
+
+router.route('/')
+  .get(usersController.index);
+  // .post(usersController.create);
 
 // router.get('/:username',function(req,res,next){
 //   User.findOne({githubUsername: req.params.githubUsername}, function(err, question){
@@ -24,7 +21,20 @@ router.get('/', function(req, res, next) {
 //   User.findOne({});
 // });
 
+router.get('/chat',function(req, res, next){
+  res.render('chat', {title: 'Express'});
+});
+router.route('/logged_in')
+  .get(usersController.logged_in);
 
+// router.get('/logged_in', function(req, res, next){
+
+//   User.find({}, function(err, users){
+//     if(err)
+//       throw err;
+//     res.render(users);
+//   });
+// });
 
 router.get('/login', function(req, res, next){
   res.render('login');
