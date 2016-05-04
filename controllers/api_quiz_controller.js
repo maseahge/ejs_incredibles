@@ -15,9 +15,48 @@ questions.create = function(req, res) {
   var body = req.body.body;
   var question = new Question({ title: title, body: body });
   question.save(function(err, question){
-    req.json(question);
+    if(err){
+      throw err;
+    }
+    res.redirect('questions');
   });
-}
+};
+// app.post('/questions_show', (req, res) => {
+//   db.collection('quotes').save(req.body, (err, result) => {
+//     if (err) return console.log(err)
+
+//     console.log('saved to database')
+//     res.redirect('/')
+//   })
+// })
+
+questions.new = function(req, res) {
+  res.render('questions-new', { title: 'Questions' });
+    // Set the internal database variable
+    var db = req.db;
+
+    // Get our form values. These rely on the "name" attributes
+    var title = req.body.username;
+    var body = req.body.category;
+
+    // Set collection
+    var collection = db.get('question');
+
+    collection.insert({
+      "title" : title,
+      "category" : category,
+      "content" : content
+    }, function (err, doc) {
+      if (err) {
+        // If it failed, return error
+        res.send("There was a problem adding the information to the database.");
+      }
+      else {
+        // And forward to success page
+        res.redirect('/questions');
+      }
+  });
+};
 
 questions.show = function(req, res) {
   Question.findById(req.params.id, function(err, question){

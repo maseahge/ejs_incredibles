@@ -8,9 +8,12 @@
   <h1>Interview questions</h1>
     <ul>
       <% questions.forEach(function(question) { %>
-          <li><a href='/api/quiz/<%= question._id %>'><%= question.title %></a> - <%= question.categories %></li>
+          <li><a href='/api/quiz/<%= question._id %>'><%= question.title %></a> - <% question.categories.forEach(function(category) { %> <%= category.name %> <% }) %><a>Delete</a></li>
       <% }); %>
     </ul>
+    <a href="" id:"addQuestion">Add Question</a>
+    <a href="/api/quiz">Back</a>
+    <a href="/">Logout</a>
 
 </body>
 </html>

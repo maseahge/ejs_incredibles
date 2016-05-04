@@ -17,8 +17,6 @@ var partials = require('express-partials');
 var db = require('./db');
 var User = require('./models/user');
 
-
-
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
