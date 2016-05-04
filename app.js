@@ -53,11 +53,10 @@ passport.use(new GitHubStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
 
-      console.log(profile);
+      // console.log(profile);
         User.findOne({'githubUsername': profile.username}, function(err, user) {
         if (err) return done(err);
         if (user) {
-          console.log(user);
           return done(null, user);
         } else {
           var newUser = new User();
@@ -75,7 +74,7 @@ passport.use(new GitHubStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      return done(null, profile);
+
     });
   }
 ));
@@ -142,6 +141,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
+
     res.redirect('/logged_in');
   });
 

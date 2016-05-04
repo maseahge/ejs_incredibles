@@ -24,10 +24,17 @@ router.route('/')
 router.get('/chat',function(req, res, next){
   res.render('chat', {title: 'Express'});
 });
+router.route('/logged_in')
+  .get(usersController.logged_in);
 
-router.get('/logged_in', function(req, res, next){
-  res.render('logged_in');
-});
+// router.get('/logged_in', function(req, res, next){
+
+//   User.find({}, function(err, users){
+//     if(err)
+//       throw err;
+//     res.render(users);
+//   });
+// });
 
 router.get('/login', function(req, res, next){
   res.render('login');

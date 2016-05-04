@@ -10,5 +10,12 @@ users.index = function(req,res) {
   });
 };
 
-
+users.logged_in = function(req,res){
+  User.findOne({}, function(err, users){
+    if(err){
+      throw err;
+    }
+    res.render('logged_in', {title: 'Express', users: users});
+  });
+};
 module.exports = users;
