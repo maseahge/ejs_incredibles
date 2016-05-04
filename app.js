@@ -16,6 +16,8 @@ var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 var db = require('./db');
 var User = require('./models/user');
+var methodOverride = require('method-override')
+
 
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
@@ -55,11 +57,10 @@ passport.use(new GitHubStrategy({
     // asynchronous verification, for effect...
     process.nextTick(function () {
 
-      console.log(profile);
+      // console.log(profile);
         User.findOne({'githubUsername': profile.username}, function(err, user) {
         if (err) return done(err);
         if (user) {
-          console.log(user);
           return done(null, user);
         } else {
           var newUser = new User();
@@ -77,7 +78,7 @@ passport.use(new GitHubStrategy({
       // represent the logged-in user.  In a typical application, you would want
       // to associate the GitHub account with a user record in your database,
       // and return that user instead.
-      return done(null, profile);
+
     });
   }
 ));
@@ -107,6 +108,8 @@ app.use(cookieParser());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(methodOverride('_method'));
+
 
 
 // Initialize Passport!  Also use passport.session() middleware, to support
@@ -143,7 +146,8 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+
+    res.redirect('/logged_in');
   });
 
 app.get('/logout', function(req, res){
