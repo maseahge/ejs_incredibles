@@ -16,6 +16,8 @@ var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 var db = require('./db');
 var User = require('./models/user');
+var methodOverride = require('method-override')
+
 
 
 
@@ -108,6 +110,8 @@ app.use(cookieParser());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(methodOverride('_method'));
+
 
 
 // Initialize Passport!  Also use passport.session() middleware, to support

@@ -5,9 +5,11 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Check out this post lol</h1>
-    <%= post.title %><br>
-    <%= post.category %><br>
-    <%= post.content %>
+    <h2>Check out this post lol</h2><br>
+    <b>title:</b> <%= post.title %><br><br>
+    <b>category:</b> <%= post.category %><br><br>
+    <b>content:</b> <%= post.content %><br><br>
+    <a href='/posts/<%= post.id %>/edit'>Edit</a><br>
+    <a href='/posts'>Back</a>
   </body>
 </html>

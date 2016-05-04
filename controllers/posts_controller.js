@@ -2,11 +2,13 @@ var Post = require('../models/post');
 var posts = {};
 
 posts.index = function(req, res) {
-  Post.find({}, function(err, posts) {
+  var posts = Post.find({}, function(err, posts) {
     if (err) {
       throw err;
     }
-    res.json(posts);
+    // res.json(posts);
+    // below code loads posts-index.ejs in view
+    res.render('posts-index', { posts: posts });
   });
 };
 
@@ -26,12 +28,11 @@ posts.new = function(req, res) {
       "title" : title,
       "category" : category,
       "content" : content
-    }, function (err, doc) {
+    }, function (err, post) {
       if (err) {
         // If it failed, return error
         res.send("There was a problem adding the information to the database.");
-      }
-      else {
+      } else {
         // And forward to success page
         res.redirect('/posts');
       }
@@ -66,16 +67,66 @@ posts.edit = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('posts-show', {post: post});
+    res.render('posts-edit', {post: post});
   });
 };
 
 posts.update = function(req, res) {
+  var title = req.body.title;
+  var category = req.body.category;
+  var content = req.body.content;
 
+  console.log('body is: ' + req.body);
+
+ //find the document by ID
+  Post.findById(req.params.id, function (err, post) {
+    //update it
+    console.log('post to update is: ' + post);
+    post.update({
+      title : title,
+      category : category,
+      content : content,
+    }, function (err, posts) {
+      if (err) {
+        res.send("There was a problem updating the information to the database: " + err);
+      }
+      else {
+        res.redirect('/posts/' + post.id);
+      }
+    });
+  });
 };
 
 posts.destroy = function(req, res) {
-
+Post.findById(req.params.id, function (err, post) {
+        if (err) {
+            return console.error(err);
+        } else {
+            //remove it from Mongo
+            post.remove(function (err, post) {
+                if (err) {
+                    return console.error(err);
+                } else {
+                    //Returning success messages saying it was deleted
+                    console.log('DELETE removing ID: ' + post._id);
+                    res.format({
+                        //HTML returns us back to the main page, or you can create a success page
+                          html: function(){
+                               res.redirect("/posts");
+                         },
+                         //JSON returns the item with the message that is has been deleted
+                        json: function(){
+                               res.json({message : 'deleted',
+                                   item : post
+                               });
+                         }
+                      });
+                }
+            });
+        }
+    });
 };
+
+
 
 module.exports = posts;
