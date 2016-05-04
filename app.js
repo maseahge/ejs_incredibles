@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //Quiz routes
-var apiQuizRoute = require('./routes/api_quiz_router');
+var questionsRoute = require('./routes/api_questions_router');
 
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
@@ -124,6 +124,8 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/posts', postRoutes);
 app.use('/welcome', welcome);
+// Handling Quiz API requests
+app.use('/questions', questionsRoute)
 
 
 // GET /auth/github
@@ -156,8 +158,6 @@ app.get('/logout', function(req, res){
 });
 
 
-// Handling Quiz API requests
-app.use('/api/quiz', apiQuizRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

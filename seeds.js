@@ -1,5 +1,5 @@
 var db = require('./db');
-var Question = require('./models/quiz');
+var Question = require('./models/question');
 
 Question.remove({}, function(){
 
