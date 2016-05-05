@@ -1,5 +1,31 @@
 # The Incredibles
 
+####Installation Instructions:
+Fork the link and then clone it to your git repo in the terminal.  For help on that, clikc [here] ( )
+
+Once you have it on your system, go into the "ejs_incredibles" folder and run:
+> npm install
+
+This will populate the app with all of the dependencies needed
+
+From there you need to open a new tab in your Terminal - "Command + N"
+
+In this tab, you want to run the following:
+
+>mongod
+
+If that doesn't work, try:
+
+>sudo mongod
+
+When it asks for your password, enter your login password for your computer.
+
+Once your database and app are running, click this [link] (http:localhost:3000)
+
+There is the app.
+
+Alternatively, you can click the link under the links tab to go to it imediately, with no downloads.
+
 ####Our Approach:
 Fortunately we were given topics to choose from, and as a group we narrowed down our top 3 very quickly.  We were all decided on our first pick, and were lucky enough to get it!
 
