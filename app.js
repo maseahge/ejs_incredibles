@@ -16,7 +16,7 @@ var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 var db = require('./db');
 var User = require('./models/user');
-var methodOverride = require('method-override')
+var methodOverride = require('method-override');
 
 
 
@@ -34,11 +34,15 @@ var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 //   have a database of user records, the complete GitHub profile is serialized
 //   and deserialized.
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  // console.log(user);
+  done(null, user.githubUsername);
 });
 
 passport.deserializeUser(function(obj, done) {
-  done(null, obj);
+  console.log(obj);
+  User.findOne({githubUsername: obj}, function(err, user){
+    done(null, user);
+  });
 });
 
 
