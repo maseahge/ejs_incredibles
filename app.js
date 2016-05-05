@@ -19,12 +19,16 @@ var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
+// var GLASSDOOR_PARTNER_ID = process.env.GLASSDOOR_PARTNER_ID
+// var GLASSDOOR_CLIENT_SECRECT = process.env.GLASSDOOR_CLIENT_SECRECT
+
 
 
 // Use the GitHubStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, and GitHub
 //   profile), and invoke a callback with a user object.
+
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
