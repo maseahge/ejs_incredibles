@@ -21,7 +21,8 @@ var QuestionSchema = mongoose.Schema({
   },
   categories: [CategorySchema],
   createdAt: { type: Date, default: Date.now() },
-  user: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  // user: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  user: {type: String}
 });
 
 // Static Methods

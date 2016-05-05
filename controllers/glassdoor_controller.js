@@ -1,3 +1,3 @@
-var glassdoor = require('../models/glassdoor')
+var glassdoor = require('../models/glassdoor');
 
 

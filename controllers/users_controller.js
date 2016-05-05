@@ -18,4 +18,8 @@ users.logged_in = function(req,res){
     res.render('logged_in', {title: 'Express', users: users});
   });
 };
+
+users.chat = function(req,res){
+  res.redirect('/chat');
+};
 module.exports = users;
