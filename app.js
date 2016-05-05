@@ -7,6 +7,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var gdroutes = require('./routes/gdroutes');
+var flash = require('req-flash');
+
+
+//Quiz routes
+var questionsRoute = require('./routes/api_questions_router');
+
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
@@ -17,8 +24,7 @@ var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
-// var GLASSDOOR_PARTNER_ID = process.env.GLASSDOOR_PARTNER_ID
-// var GLASSDOOR_CLIENT_SECRECT = process.env.GLASSDOOR_CLIENT_SECRECT
+
 
 // Use the GitHubStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
@@ -107,6 +113,7 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
 app.use(methodOverride('_method'));
+app.use(flash({locals: 'flash'}));
 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
@@ -121,6 +128,8 @@ app.use('/posts', postRoutes);
 app.use('/welcome', welcome);
 // Handling Quiz API requests
 app.use('/questions', questionsRoute);
+//Glassdoor API
+app.use('/glassdoor', gdroutes);
 
 // GET /auth/github
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -155,6 +164,9 @@ function ensureAuthenticated(req, res, next){
     res.redirect('/welcome');
   }
 }
+
+app.use('/posts', ensureAuthenticated);
+app.use('/questions', ensureAuthenticated);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

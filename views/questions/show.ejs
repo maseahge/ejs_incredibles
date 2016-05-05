@@ -6,11 +6,11 @@
  </head>
  <body>
    <h1>Here is your question to live:</h1>
-   <%= question.title %>
+   <strong>Question Title:</strong>    <%= question.title %>
    <br>
-   <%= question.body %>
+   <strong>Body: </strong>    <%= question.body %>
    <br>
-   <%= question %>
+   <strong>Posted by:  </strong>  <%= question.user %>
    <br>
    <a href='/questions/<%= question._id %>/edit'>Edit</a>
    <form action="/questions/<%= question._id %>?_method=DELETE" method="POST" accept-charset="utf-8">

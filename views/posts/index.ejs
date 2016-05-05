@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+  <a href="/logout" title="">Logout</a>
     <%
       if(posts === posts) { %>
         <div class="container" id="container">
@@ -15,7 +16,8 @@
           </div>
           <% } %>
         <br><br><br><br><a href='/posts/new'>New Post</a>
-        <br><a href='/'>Back Home</a>
+        <br><a href='/'>Home</a><br>
+        <a href='/logged_in' title="">Back</a>
         </div;>
       <%} else {
           res.redirect('/')
