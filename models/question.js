@@ -14,6 +14,7 @@ var QuestionSchema = mongoose.Schema({
     type: String,
     default: "Herein lies the key to your future!"
   },
+
   voteCount: {
     type: Number,
     default: 0

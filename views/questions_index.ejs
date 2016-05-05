@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Index</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <h1>Interview questions</h1>
+    <ul>
+      <% questions.forEach(function(question) { %>
+          <li><a href='/questions/<%= question._id %>'><%= question.title %></a> - <% question.categories.forEach(function(category) { %> <%= category.name %> <% }) %>
+          <a href='/questions/<%= question._id %>'><%= question.title %><a>Delete</a></li>
+      <% }); %>
+    </ul>
+    <a href="/questions/new" id:"addQuestion">Add Question</a>
+    <a href="/questions">Back</a>
+    <a href="/">Logout</a>
+
+</body>
+</html>
+
