@@ -7,6 +7,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var gdroutes = require('./routes/gdroutes');
+
+
+//Quiz routes
+var questionsRoute = require('./routes/api_questions_router');
+
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
@@ -19,8 +25,7 @@ var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
-// var GLASSDOOR_PARTNER_ID = process.env.GLASSDOOR_PARTNER_ID
-// var GLASSDOOR_CLIENT_SECRECT = process.env.GLASSDOOR_CLIENT_SECRECT
+
 
 
 
@@ -128,6 +133,8 @@ app.use('/posts', postRoutes);
 app.use('/welcome', welcome);
 // Handling Quiz API requests
 app.use('/questions', questionsRoute);
+//Glassdoor API
+app.use('/glassdoor', gdroutes);
 
 
 // GET /auth/github
