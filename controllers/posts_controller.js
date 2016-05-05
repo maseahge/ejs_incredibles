@@ -41,6 +41,7 @@ posts.new = function(req, res) {
 };
 
 posts.create = function(req, res) {
+  console.log(req.user);
   var post = new Post();
   post.title = req.body.title;
   post.category = req.body.category;
