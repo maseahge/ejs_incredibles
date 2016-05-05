@@ -6,21 +6,12 @@ questions.index = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('questions_index', {questions: questions});
+    res.render('questions/index', {questions: questions});
   });
 }
-// posts index function
-// posts.index = function(req, res) {
-//   var posts = Post.find({}, function(err, posts) {
-//     if (err) {
-//       throw err;
-//     }
-//     res.render('posts-index', { posts: posts });
-//   });
-// };
 
 questions.new = function(req, res) {
-  res.render('questions_new', { title: 'Questions' });
+  res.render('questions/new', { title: 'Questions' });
     // Set the internal database variable
     var db = req.db;
 
@@ -68,7 +59,7 @@ questions.show = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('questions_show', {question: question});
+    res.render('questions/show', {question: question});
   });
 }
 
@@ -77,7 +68,7 @@ questions.edit = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('questions_edit', {question: question});
+    res.render('questions/edit', {question: question});
   });
 };
 
