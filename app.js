@@ -13,16 +13,12 @@ var partials = require('express-partials');
 var methodOverride = require('method-override');
 
 
-
-
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
 // var GLASSDOOR_PARTNER_ID = process.env.GLASSDOOR_PARTNER_ID
 // var GLASSDOOR_CLIENT_SECRECT = process.env.GLASSDOOR_CLIENT_SECRECT
-
-
 
 // Use the GitHubStrategy within Passport.
 //   Strategies in Passport require a `verify` function, which accept
@@ -112,14 +108,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
 app.use(methodOverride('_method'));
 
-
-
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // setting up routes
 app.use('/', routes);
@@ -129,7 +122,6 @@ app.use('/welcome', welcome);
 // Handling Quiz API requests
 app.use('/questions', questionsRoute);
 
-
 // GET /auth/github
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in GitHub authentication will involve redirecting
@@ -138,7 +130,6 @@ app.use('/questions', questionsRoute);
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] })
   );
-
 
 // GET /auth/github/callback
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -172,10 +163,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-
-
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -197,6 +185,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

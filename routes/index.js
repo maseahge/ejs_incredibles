@@ -52,14 +52,14 @@ router.get('/login', function(req, res, next){
 
 
 
-router.get('/sign_up', function(req,res,next){
-  res.render('sign_up');
-});
+// router.get('/sign_up', function(req,res,next){
+//   res.render('sign_up');
+// });
 
-router.post('/sign_up', function(req,res,next){
+// router.post('/sign_up', function(req,res,next){
 
-  res.json({message: "successfully added new user"});
-});
+//   res.json({message: "successfully added new user"});
+// });
 
 
 

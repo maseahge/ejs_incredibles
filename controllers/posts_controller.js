@@ -41,7 +41,7 @@ posts.new = function(req, res) {
 };
 
 posts.create = function(req, res) {
-  console.log(req.user);
+  // console.log(req.user);
   var post = new Post();
   post.title = req.body.title;
   post.category = req.body.category;
@@ -50,7 +50,7 @@ posts.create = function(req, res) {
     if(err){
       throw err;
     }
-    post.user.push(users[0]._id);
+    post.user.push(req.user);
     post.save(function(err){
       if(err){
         throw err;

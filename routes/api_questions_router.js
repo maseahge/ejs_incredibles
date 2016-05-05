@@ -7,15 +7,15 @@ router.route('/')
   .post(questionsController.create);
 
 router.route('/new')
-  .get(questionsController.new)
+  .get(questionsController.new);
 
 router.route('/:id')
   .get(questionsController.show)
   .patch(questionsController.update)
-  .delete(questionsController.destroy)
+  .delete(questionsController.destroy);
 
 router.route('/:id/edit')
-  .get(questionsController.edit)
+  .get(questionsController.edit);
 
 // router.patch('/:id/vote/up', questions.voteUp);
 // router.patch('/:id/vote/down', questions.voteDown);
