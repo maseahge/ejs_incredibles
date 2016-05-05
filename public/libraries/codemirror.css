@@ -5,6 +5,11 @@
   font-family: monospace;
   height: 300px;
   color: black;
+  margin-top: 10px;
+}
+
+#title {
+  text-align: center;
 }
 
 /* PADDING */

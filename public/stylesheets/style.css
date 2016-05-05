@@ -7,7 +7,20 @@ a {
   color: #00B7FF;
 }
 
+#canvasStyling {
+	border: solid;
+    border-width: 2px;
+ }
+
 #messages { 
 	margin: 0; 
 	padding: 0;
+}
+
+.messages {
+	display: inline-block;
+}
+
+.authors{
+	display: inline-block;
 }
