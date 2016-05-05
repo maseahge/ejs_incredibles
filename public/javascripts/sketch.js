@@ -74,6 +74,7 @@ socket.on('message-received', function(data){
 	var newMessage = '<li>' + data.author + ': ' + data.message + '</li>';
 	// var newMessageLi = $(newMessage);
 	// messagesUl.append(newMessageLi);
+	//decide on append vs prepend
 	messagesUl.append(newMessage);
 });
 
