@@ -26,9 +26,11 @@
       <input type=submit value="submit">
     </form>
 
-    <form method="post" action="/posts/<%= post._id %>?_method=DELETE">
+  <form method="post" action="/posts/<%= post._id %>?_method=DELETE">
+    <% if ( post.userId === post.userId ) { %>
       <button type='submit'>Delete</button>
-    </form>
+    <%}%>
+  </form>
 
   </body>
 </html>

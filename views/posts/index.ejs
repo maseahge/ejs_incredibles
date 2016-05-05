@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Create Post</title>
+    <title>Posts</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Posts!</h1>
-    <% for(var i=0; i<posts.length; i++) {%>
-   <li><a href='/posts/<%= posts[i].id %>'><%= posts[i].title %></a></li>
-<% } %>
-  <br><br><br><br><a href='/posts/new'>New Post</a>
-  <br><a href='/'>Back Home</a>
+    <%
+      if(posts === posts) { %>
+        <div class="container" id="container">
+          <h1>Recent Posts</h1>
+          <% for(var i=0; i<posts.length; i++) {%>
+          <div id="onePost">
+            <a href='/posts/<%= posts[i].id %>'><br><%= posts[i].title %></a><br><br><%= posts[i].category %><br><%= posts[i].tldr %><br><%= posts[i].content %><br><br>
+          </div>
+          <% } %>
+        <br><br><br><br><a href='/posts/new'>New Post</a>
+        <br><a href='/'>Back Home</a>
+        </div;>
+      <%} else {
+          res.redirect('/')
+      }%>
   </body>
 </html>
