@@ -24,6 +24,7 @@ posts.new = function(req, res) {
 
     // Set our collection
     var collection = db.get('post');
+    console.log('user: ' + user);
 
     collection.insert({
       "title" : title,
@@ -42,6 +43,7 @@ posts.new = function(req, res) {
 
 posts.create = function(req, res) {
   var post = new Post();
+  console.log(req.user);
   post.title = req.body.title;
   post.category = req.body.category;
   post.content = req.body.content;
@@ -49,7 +51,7 @@ posts.create = function(req, res) {
     if(err){
       throw err;
     }
-    post.user.push(users[0]._id);
+    post.user = req.user.githubUsername;
     post.save(function(err){
       if(err){
         throw err;
@@ -58,7 +60,6 @@ posts.create = function(req, res) {
     });
 
   });
-
 };
 
 posts.show = function(req, res) {
@@ -66,8 +67,10 @@ posts.show = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('posts/show', {post: post});
+    res.render('posts/show', {user: req.user, post: post});
   });
+
+
 };
 
 posts.edit = function(req, res) {

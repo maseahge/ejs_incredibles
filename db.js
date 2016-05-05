@@ -4,3 +4,5 @@ var mongooseURL = process.env.MONGODB_URI || 'mongodb://localhost/ejs_incredible
 mongoose.connect(mongooseURL);
 
 module.exports = mongoose;
+
+

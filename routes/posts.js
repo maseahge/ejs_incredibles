@@ -3,18 +3,26 @@ var router = express.Router();
 var postsController = require('../controllers/posts_controller')
 
 router.route('/')
-  .get(postsController.index)
-  .post(postsController.create);
+  .get(ensureAuthenticated, postsController.index)
+  .post(ensureAuthenticated, postsController.create);
 
 router.route('/new')
-  .get(postsController.new);
+  .get(ensureAuthenticated, postsController.new);
 
 router.route('/:id')
-  .get(postsController.show)
-  .patch(postsController.update)
-  .delete(postsController.destroy);
+  .get(ensureAuthenticated, postsController.show)
+  .patch(ensureAuthenticated, postsController.update)
+  .delete(ensureAuthenticated, postsController.destroy);
 
 router.route('/:id/edit')
-  .get(postsController.edit);
+  .get(ensureAuthenticated, postsController.edit);
+
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect('/welcome');
+  }
+}
 
 module.exports = router;
