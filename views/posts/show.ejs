@@ -10,10 +10,12 @@
     <b>TLDR:</b> <%= post.tldr %><br><br>
     <b>category:</b> <%= post.category %><br><br>
     <b>content:</b> <%= post.content %><br><br>
-    <b>user:</b> <%= post.userId %><br><br>
     <% if ( post.userId === post.userId ) { %>
       <a href='/posts/<%= post.id %>/edit'>Edit</a><br>
     <%}%>
+    <b>submitted by:</b> <%= post.user %><br><br>
+
+    <a href='/posts/<%= post.id %>/edit'>Edit</a><br>
     <a href='/posts'>Back</a>
   </body>
 </html>
