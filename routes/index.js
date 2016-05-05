@@ -24,6 +24,11 @@ router.route('/')
 router.get('/chat',function(req, res, next){
   res.render('chat', {title: 'Express'});
 });
+
+router.get('/code_practice',function(req, res, next){
+  res.render('code_practice', {title: 'Express'});
+});
+
 router.route('/logged_in')
   .get(usersController.logged_in);
 
@@ -39,6 +44,10 @@ router.route('/logged_in')
 router.get('/login', function(req, res, next){
   res.render('login');
 });
+
+// router.get('/code_practice', function(req, res) {
+//   res.render('code_practice')
+// });
 
 router.get('/sign_up', function(req,res,next){
   res.render('sign_up');

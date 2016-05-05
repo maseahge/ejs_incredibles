@@ -8,14 +8,22 @@ function setup(){
 	// socket = io.connect('http://localhost:3000')
 }
 
-
+//draw when you click mouse
+//clear canvas when you right click
 function draw() {
 	if (mouseIsPressed){
+		if (mouseButton == RIGHT){
+			clear();
+		}
 		ellipse(mouseX, mouseY, 4, 4);
 		socket.emit('bolita', {x: mouseX, y:mouseY })
 	}
+	// if (mouseClicked){
+	// 	clear();
+	// }
 
 }
+
 
 socket.on('newBolita', function(data){
 	console.log(data);
@@ -35,13 +43,14 @@ button.addEventListener('click', function(event){
 
 socket.on('message-received', function(data){
 	console.log(data);
-	var newMessage = document.createElement('li');
+	var newMessage = document.createElement('div');
+	newMessage.className = "messages";
 	newMessage.appendChild(document.createTextNode(data));
 	console.log(newMessage)
 	console.log(document.querySelector('#messages'))
 	document.querySelector('#messages').appendChild(newMessage);
-	// $('#messages').append($('#message').text(data));
-	//append data to i=ul?
 });
+
+
 
 

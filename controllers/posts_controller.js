@@ -1,4 +1,5 @@
 var Post = require('../models/post');
+var User = require('../models/user');
 var posts = {};
 
 posts.index = function(req, res) {
@@ -44,13 +45,20 @@ posts.create = function(req, res) {
   post.title = req.body.title;
   post.category = req.body.category;
   post.content = req.body.content;
-
-  post.save(function(err){
+  User.find({}, function(err,users){
     if(err){
       throw err;
     }
-    res.redirect('posts');
+    post.user.push(users[0]._id);
+    post.save(function(err){
+      if(err){
+        throw err;
+      }
+      res.redirect('posts');
+    });
+
   });
+
 };
 
 posts.show = function(req, res) {
