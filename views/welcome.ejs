@@ -5,12 +5,18 @@
 <style type="text/css" media="screen">
   body{ text-align: center }
 </style>
-</head>
-<body>
 
+<% include ./partials/head %>
+</head>
+<body class="container">
 <h1>Welcome to the Incredibles App</h1>
 <p>Please login or sign up with github</p>
 <p>To access our awesome app</p>
+<header>
+<% include ./partials/header %>
+</header>
+
+<p>Please login or sign up with github to access our awesome app</p>
     <!-- <section id="question">
       <article class="question selected">
         <p>What are your hobbies?</p>
@@ -26,12 +32,19 @@
 
     </section>
  -->
-    <nav id="controls">
+   <!--  <nav id="controls">
 
       <a href="login" title="">Login page</a>
       <!-- <a href="sign_up" title=""> Sign Up </a> -->
 
 
-    </nav>
+    </nav> -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <footer>
+    <% include ./partials/footer %>
+    </footer>
 </body>
 </html>
