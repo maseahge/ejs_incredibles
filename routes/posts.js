@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var postsController = require('../controllers/posts_controller')
+var postsController = require('../controllers/posts_controller');
 
 router.route('/')
   .get(ensureAuthenticated, postsController.index)
@@ -21,7 +21,8 @@ function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();
   } else {
-    res.redirect('/welcome');
+    req.flash('message', 'welcome key is not present');
+    res.redirect('/');
   }
 }
 

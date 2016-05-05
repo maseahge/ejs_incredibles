@@ -1,5 +1,5 @@
 var Question = require('../models/question');
-var questions = {}
+var questions = {};
 
 questions.index = function(req, res) {
   Question.find({}, function(err, questions) {
@@ -8,7 +8,7 @@ questions.index = function(req, res) {
     }
     res.render('questions/index', {questions: questions});
   });
-}
+};
 
 questions.new = function(req, res) {
   res.render('questions/new', { title: 'Questions' });
@@ -40,14 +40,16 @@ questions.new = function(req, res) {
 
 questions.create = function(req, res) {
   var question = new Question();
+  console.log(req.user);
   question.title = req.body.title;
   question.category = req.body.category;
   question.body = req.body.body;
+  question.user = req.user.githubUsername;
   console.log(req.body);
 
   question.save(function(err, question){
     if(err){
-      throw err;
+      console.log(err);
     }
     res.redirect('/questions');
   });
@@ -61,7 +63,7 @@ questions.show = function(req, res) {
     }
     res.render('questions/show', {question: question});
   });
-}
+};
 
 questions.edit = function(req, res) {
   Question.findById(req.params.id, function(err, question) {
@@ -127,7 +129,7 @@ Question.findById(req.params.id, function (err, question) {
             });
         }
     });
-}
+};
 module.exports = questions;
 
 
