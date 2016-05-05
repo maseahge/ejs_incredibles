@@ -47,7 +47,7 @@ questions.create = function(req, res) {
 
   question.save(function(err, question){
     if(err){
-      throw err;
+      console.log(err);
     }
     res.redirect('/questions');
   });

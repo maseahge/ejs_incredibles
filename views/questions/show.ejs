@@ -12,7 +12,12 @@
    <br>
    <%= question %>
    <br>
-   <a href='/questions/<%= question.id %>/edit'>Edit</a>
+   <a href='/questions/<%= question._id %>/edit'>Edit</a>
+   <form action="/questions/<%= question._id %>?_method=DELETE" method="POST" accept-charset="utf-8">
+
+      <button>Delete</button>
+
+   </form>
    <a href="/questions">Back</a>
 
  </body>
