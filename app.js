@@ -7,23 +7,59 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
-//Quiz routes
-var questionsRoute = require('./routes/api_questions_router');
-
 var methodOverride = require('method-override');
 var GitHubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
-var db = require('./db');
-var User = require('./models/user');
 var methodOverride = require('method-override');
+
+
 
 
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
 
+
+
+// Use the GitHubStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and GitHub
+//   profile), and invoke a callback with a user object.
+passport.use(new GitHubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: GITHUB_CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+
+      // console.log(profile);
+        User.findOne({githubUsername: profile.username}, function(err, user) {
+        if (err) return done(err);
+        if (user) {
+          return done(null, user);
+        } else {
+          var newUser = new User();
+          newUser.fullName = profile.displayName;
+          newUser.githubUsername = profile.username;
+          newUser.githubProfile = profile.profileUrl;
+          newUser.save(function(err) {
+            if (err) throw err;
+            return done(null, newUser);
+          });
+        }
+      });
+
+
+      // To keep the example simple, the user's GitHub profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the GitHub account with a user record in your database,
+      // and return that user instead.
+
+    });
+  }
+));
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -40,64 +76,28 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   console.log(obj);
   User.findOne({githubUsername: obj}, function(err, user){
-    done(null, user);
+    if(!err){
+      done(null, user);
+    } else {
+      done(err, null);
+    }
   });
 });
 
 
-
-// Use the GitHubStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and GitHub
-//   profile), and invoke a callback with a user object.
-
-
-
-passport.use(new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: GITHUB_CALLBACK_URL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-
-      // console.log(profile);
-        User.findOne({'githubUsername': profile.username}, function(err, user) {
-        if (err) return done(err);
-        if (user) {
-          return done(null, user);
-        } else {
-          var newUser = new User();
-          newUser.fullName = profile.displayName;
-          newUser.githubUsername = profile.username;
-          newUser.githubProfile = profile.profileUrl;
-          newUser.save(function(err) {
-            if (err) throw err;
-            return done(null, newUser);
-          });
-        }
-      });
-
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-
-    });
-  }
-));
-
+//setting up routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var postRoutes = require('./routes/posts');
-var Post = require('./models/post');
-
+var questionsRoute = require('./routes/api_questions_router');
 var welcome = require('./routes/welcome');
 
-var app = express();
-
+// requiring models
 var db = require('./db');
+var Post = require('./models/post');
+var User = require('./models/user');
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -112,7 +112,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
 app.use(methodOverride('_method'));
 
 
@@ -130,7 +130,7 @@ app.use('/users', users);
 app.use('/posts', postRoutes);
 app.use('/welcome', welcome);
 // Handling Quiz API requests
-app.use('/questions', questionsRoute)
+app.use('/questions', questionsRoute);
 
 
 // GET /auth/github
@@ -164,12 +164,16 @@ app.get('/logout', function(req, res){
 
 
 
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+
 
 // error handlers
 
