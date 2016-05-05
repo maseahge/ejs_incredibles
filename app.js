@@ -32,32 +32,25 @@ passport.use(new GitHubStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
-    process.nextTick(function () {
 
-      // console.log(profile);
-        User.findOne({githubUsername: profile.username}, function(err, user) {
-        if (err) return done(err);
-        if (user) {
-          return done(null, user);
+  User.findOne({githubUsername: profile.username}, function(err, user){
+    if(!err && user !== null){
+      done(null, user);
+    } else {
+      user = new User({
+        fullName: profile.displayName,
+        githubUsername: profile.username,
+        githubProfile: profile.profileUrl
+      });
+      user.save(function(err){
+        if(err){
+          done(err);
         } else {
-          var newUser = new User();
-          newUser.fullName = profile.displayName;
-          newUser.githubUsername = profile.username;
-          newUser.githubProfile = profile.profileUrl;
-          newUser.save(function(err) {
-            if (err) throw err;
-            return done(null, newUser);
-          });
+          done(null, user);
         }
       });
-
-
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-
-    });
+    }
+  });
   }
 ));
 
@@ -74,7 +67,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(obj, done) {
-  console.log(obj);
+  // console.log(obj);
   User.findOne({githubUsername: obj}, function(err, user){
     if(!err){
       done(null, user);
@@ -139,11 +132,9 @@ app.use('/questions', questionsRoute);
 //   the user to github.com.  After authorization, GitHub will redirect the user
 //   back to this application at /auth/github/callback
 app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }),
-  function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
-  });
+  passport.authenticate('github', { scope: [ 'user:email' ] })
+  );
+
 
 // GET /auth/github/callback
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -152,7 +143,7 @@ app.get('/auth/github',
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
+  function(req, res, next) {
 
     res.redirect('/logged_in');
   });
@@ -162,9 +153,13 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
-
-
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect('/welcome');
+  }
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
