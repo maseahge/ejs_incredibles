@@ -6,7 +6,7 @@ users.index = function(req,res) {
     if(err){
       throw err;
     }
-    res.render('index', {title: 'Express', users: users});
+    res.render('welcome', {title: 'Express', users: users});
   });
 };
 

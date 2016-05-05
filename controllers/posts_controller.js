@@ -8,12 +8,12 @@ posts.index = function(req, res) {
     }
     // res.json(posts);
     // below code loads posts-index.ejs in view
-    res.render('posts-index', { posts: posts });
+    res.render('posts/index', { posts: posts });
   });
 };
 
 posts.new = function(req, res) {
-  res.render('posts-new', { title: 'Posts' });
+  res.render('posts/new', { title: 'Posts' });
     // Set our internal DB variable
     var db = req.db;
 
@@ -58,7 +58,7 @@ posts.show = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('posts-show', {post: post});
+    res.render('posts/show', {post: post});
   });
 };
 
@@ -67,7 +67,7 @@ posts.edit = function(req, res) {
     if (err) {
       throw err;
     }
-    res.render('posts-edit', {post: post});
+    res.render('posts/edit', {post: post});
   });
 };
 
