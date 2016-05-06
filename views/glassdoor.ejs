@@ -5,33 +5,38 @@
   <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
   <% include ./partials/head %>
 </head>
-<body>
+<body class="container">
 
 
   <header>
   <% include ./partials/header %>
   </header>
-
-  <div id="searchFrom">
-    <input type="text" id="companySearch" placeholder="Company Name">
-    <input type="text" id="location" placeholder="Location">
-  <button id="clicker">Search</button>
-  </div>
-
-<div id="company">Ratings for: </div>
-<div id="careerOppourtunities">Career Opportunities: </div>
-<div id="compensation">Compensation and Benefits: </div>
-<div id="culture">Culture and Values: </div>
-<div id="workBalance">Work Life Balance: </div>
-<div id="seniorLeadership">Senior Leadership: </div>
-
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <h2> Glassdoor </h2>
+    <div id="searchFrom">
+      <input type="text" id="companySearch" placeholder="Company Name">
+      <input type="text" id="location" placeholder="Location">
+    <button id="clicker">Search</button>
+    </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div id="company">Ratings for: </div>
+    <div id="careerOppourtunities">Career Opportunities: </div>
+    <div id="compensation">Compensation and Benefits: </div>
+    <div id="culture">Culture and Values: </div>
+    <div id="workBalance">Work Life Balance: </div>
+    <div id="seniorLeadership">Senior Leadership: </div>
+    <p> All ratings are out of 5 </p>
+    </div>
+</div>
 <%# results %>
 
-  <footer>
-    <% include ./partials/footer %>
+
     <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
 
-    </footer>
     <script type="text/javascript">
       function searchGlassdoor(company, location){
         // query string http://localhost:3000/glassdoor?company=facebook&location=illinois
@@ -64,6 +69,10 @@
         $('#location').val('')
         searchGlassdoor(company, location)
       })
+
+      <footer>
+        <% include ./partials/footer %>
+      </footer>
 
     </script>
 </body>
