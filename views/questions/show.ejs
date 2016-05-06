@@ -3,8 +3,13 @@
  <head>
    <title>View Question</title>
    <link rel='stylesheet' href='/stylesheets/style.css' />
+   <% include ./partials/head %>
  </head>
  <body>
+     <header>
+      <% include ./partials/header %>
+    </header>
+
    <h1>Here is your question to live:</h1>
    <%= question.title %>
    <br>
@@ -14,6 +19,11 @@
    <br>
    <a href='/questions/<%= question.id %>/edit'>Edit</a>
    <a href="/questions">Back</a>
+
+   <footer>
+      <% include ./partials/footer %>
+    </footer>
+
 
  </body>
 </html>

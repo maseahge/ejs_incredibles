@@ -3,8 +3,15 @@
   <head>
     <title>Edit Your Question</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <% include ./partials/head %>
   </head>
   <body>
+
+    <header>
+    <% include ./partials/header %>
+    </header>
+
     <h1>Make updates to your question below:</h1>
 
     <form method="post" action="/questions/<%= question._id %>?_method=PATCH">
@@ -24,5 +31,9 @@
     </form>
     <a href="/questions">Back</a>
     <a href="/">Logout</a>
+
+    <footer>
+    <% include ./partials/footer %>
+    </footer>
   </body>
 </html>
