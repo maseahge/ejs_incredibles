@@ -19,14 +19,41 @@
   </div>
 
 <div id="results"></div>
-<!-- <%= results %> -->
+<%# results %>
 
-<script src="js/app.js"></script>
 
   <footer>
     <% include ./partials/footer %>
+    <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+
     </footer>
+    <script type="text/javascript">
+      function searchGlassdoor(company, location){
+        // query string http://localhost:3000/glassdoor?company=facebook&location=illinois
+
+          $.ajax({
+            method: 'GET',
+            url: '/glassdoor/json?company=' + company + '&location=' + location,
+            success: function(data){
+              console.log(JSON.parse(data))
+              // console.log(data.)
+              // $('body').append('' + data)
+
+              // $('#results').html()
+              },
+            error: function(response){
+              console.log('error time')
+            }
+        });
+      }
+      $('#clicker').click(function(){
+        console.log('button was clicked')
+        var company = $('#companySearch').val()
+        var location = $('#location').val()
+        searchGlassdoor(company, location)
+      })
+
+    </script>
 </body>
 </html>
 
-<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
