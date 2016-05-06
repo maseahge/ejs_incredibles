@@ -3,28 +3,32 @@
   <head>
     <title>Posts</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <% include ./partials/head %>
+    <% include ../partials/head %>
   </head>
-  <body>
+  <body class="container">
     <header>
-      <% include ./partials/header %>
+      <% include ../partials/header %>
     </header>
-    <%
-      if(posts === posts) { %>
-        <div id="container" class="col-lg-offset-3 col-lg-6">
+    <% if(posts === posts) { %>
+        <div class="col-lg-offset-2 col-lg-8">
           <h2>Recent Posts</h2>
           <% for(var i=0; i<posts.length; i++) {%>
           <div id="onePost">
             <a href='/posts/<%= posts[i].id %>'><br><b><span style="font-size: 18px;"><%= posts[i].title %></span></b></a><br><br><%= posts[i].category %><br><%= posts[i].tldr %><br><%= posts[i].content %><br><br>
           </div>
           <% } %>
-        <br><br><br><br><a href='/posts/new'>New Post</a>
-        <br><a href='/logged_in'>Home</a><br>
-        <a href='/logged_in' title="">Back</a>
+          <br>
+        <a class="btn btn-default btn-sm active" href='/posts/new' role="button">New Post</a>
+        <a class="btn btn-default btn-sm active" href="/questions" role="button">Back</a>
+        <a class="btn btn-default btn-sm active" href="/logout" role="button">Logout</a>
         </div;>
       <%} else {
           res.redirect('/')
       }%>
-  <br><a href="/logout" title="">Logout</a>
+      <br>
+  <footer>
+      <% include ../partials/footer %>
+  </footer>
+
   </body>
 </html>

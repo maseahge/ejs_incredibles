@@ -3,30 +3,32 @@
 <head>
   <title>Add Question to Database</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <% include ./partials/head %>
+  <% include ../partials/head %>
 </head>
-<body>
+<body class="container">
 
     <header>
-      <% include ./partials/header %>
+      <% include ../partials/header %>
     </header>
 
-
-  <form method="post" action="/questions">
-      <input type="text" name="title" placeholder="title">
-      <br>
-      <input name="category" placeholder="category"></input>
-      <br>
-      <textarea name="body" placeholder="content" rows=20 cols=40></textarea>
-      <br>
-      <input type=submit value="submit">
-  </form>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-2" id="blurbdiv">
+        <form method="post" action="/questions">
+          <input type="text" name="title" placeholder="title">
+          <br>
+          <input name="category" placeholder="category"></input>
+          <br>
+          <textarea name="body" placeholder="content" rows=5 cols=100></textarea>
+          <br>
+          <input class="btn btn-default btn-sm active" type="submit" value="submit">
+          <a class="btn btn-default btn-sm active" href="/questions" role="button">Back</a>
+        </form>
+      </div>
+    </div>
   <br>
   <br>
-  <a href="/questions">Back</a>
-
     <footer>
-      <% include ./partials/footer %>
+      <% include ../partials/footer %>
     </footer>
 
 

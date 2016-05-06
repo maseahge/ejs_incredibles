@@ -4,29 +4,33 @@
   <title>Quiz Index</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
-  <% include ./partials/head %>
+  <% include ../partials/head %>
 </head>
-<body>
+<body class="container">
 
     <header>
-      <% include ./partials/header %>
+      <% include ../partials/header %>
     </header>
 
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2" id="blurbdiv">
+      <h2>Interview questions</h2>
+        <ul>
+          <% questions.forEach(function(question) { %>
+              <li><a href='/questions/<%= question._id %>'><%= question.title %></a> - <% question.categories.forEach(function(category) { %> <%= category.name %> <% }) %>
+              <a id="deleteQuestion">Delete<div class="hidden"><%= question._id %></div></a></li>
+          <% }); %>
+        </ul>
+        <a class="btn btn-default btn-sm active" href="/questions/new" id:"addQuestion" role="button">Add Question</a>
+        <a class="btn btn-default btn-sm active" href="/logged_in" role="button">Back</a>
+        <a class="btn btn-default btn-sm active" href="/" role="button">Logout</a>
+    </div>
+  </div>
 
-  <h2>Interview questions</h2>
-    <ul>
-      <% questions.forEach(function(question) { %>
-          <li><a href='/questions/<%= question._id %>'><%= question.title %></a> - <% question.categories.forEach(function(category) { %> <%= category.name %> <% }) %>
-          <a id="deleteQuestion">Delete<div class="hidden"><%= question._id %></div></a></li>
-      <% }); %>
-    </ul>
-    <a href="/questions/new" id:"addQuestion">Add Question</a>
-    <a href="/logged_in">Back</a>
-    <a href="/">Logout</a>
   <script src="/javascripts/questions.js"></script>
 
     <footer>
-      <% include ./partials/footer %>
+      <% include ../partials/footer %>
     </footer>
 
 </body>

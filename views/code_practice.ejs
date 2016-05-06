@@ -6,20 +6,19 @@
 	<link rel='stylesheet' href='/stylesheets/3024-night.css' />
   <% include ./partials/head %>
 </head>
-<body>
+<body class="container">
 
-<header>
-<% include ./partials/header %>
-</header>
+  <header>
+    <% include ./partials/header %>
+  </header>
 
 
-<h3 id="title">Coding Practice</h3>
-<script src="libraries/codemirror.js"></script>
-<script src="libraries/codemirror_javascript.js"></script>
-<script src="javascripts/code_practice.js"></script>
+  <h3 id="title">Coding Practice</h3>
+  <script src="libraries/codemirror.js"></script>
+  <script src="libraries/codemirror_javascript.js"></script>
+  <script src="javascripts/code_practice.js"></script>
 
-<a href='/logged_in'>Back</a>
-
+  <a class="btn btn-default btn-sm active" href="/logged_in" role="button">Back</a>
     <footer>
     <% include ./partials/footer %>
     </footer>
