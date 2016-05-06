@@ -3,16 +3,19 @@
   <head>
     <title>Posts</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ./partials/head %>
   </head>
   <body>
-  <a href="/logout" title="">Logout</a>
+    <header>
+      <% include ./partials/header %>
+    </header>
     <%
       if(posts === posts) { %>
-        <div class="container" id="container">
-          <h1>Recent Posts</h1>
+        <div id="container" class="col-lg-offset-3 col-lg-6">
+          <h2>Recent Posts</h2>
           <% for(var i=0; i<posts.length; i++) {%>
           <div id="onePost">
-            <a href='/posts/<%= posts[i].id %>'><br><%= posts[i].title %></a><br><br><%= posts[i].category %><br><%= posts[i].tldr %><br><%= posts[i].content %><br><br>
+            <a href='/posts/<%= posts[i].id %>'><br><b><span style="font-size: 18px;"><%= posts[i].title %></span></b></a><br><br><%= posts[i].category %><br><%= posts[i].tldr %><br><%= posts[i].content %><br><br>
           </div>
           <% } %>
         <br><br><br><br><a href='/posts/new'>New Post</a>
@@ -22,5 +25,6 @@
       <%} else {
           res.redirect('/')
       }%>
+  <br><a href="/logout" title="">Logout</a>
   </body>
 </html>
