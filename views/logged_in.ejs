@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-</head>
-<body>
-<h1>Hello there <%= user.githubUsername %> </h1>
-  <ul>
-    <li><a href="/posts" title="">Posts</a></li>
-    <li><a href="/chat" title="">Chat</a></li>
-    <li><a href="/questions" title="">Question</a></li>
-    <li><a href="/code_practice" title="">Practice Coding</a></li>
-    <li><a href="/about" title="">About</a></li>
-    <li><a href="/logout" title="">Logout</a></li>
-  </ul>
+  <title> Logged in User</title>
+  <style type="text/css" media="screen">
 
+  #blurb{
+    text-align: center;
+    color: gray;
+    border: blue;
+
+  }
+</style>
+
+<% include ./partials/head %>
+</head>
+<body class="container">
+
+
+<header>
+<% include ./partials/header %>
+</header>
+
+
+<h2>Hello there <%= user.githubUsername %> </h2>
+
+
+
+<div id="blurb" class="col-lg-offset-3 col-lg-6">
+    <p>This app if geared towards recent grads of General Assembly. Features included are chatting and whiteboarding with other users, submitting posts to a community board, a question feature that allows grads to post questions they need help answering, a coding practice platform that allows users to test javascript code. Log in and sign up is handled with a github Oauth. </p>
+</div>
 
 
 

@@ -6,27 +6,34 @@
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
     <style type="text/css"></style>
+    <% include ./partials/head %>
 </head>
-<body>
-    <h1>GA Chat</h1>
-    <p>Chat and whiteboard with other GA grads.</p>
-    <p>Click with 2 fingers to clear the whiteboard.</p>
-  <!--   <div id="chat">
-        <div id="authors"></div>
-        -
-        <div id="messages"></div>
-    </div> -->
+<body class="container">
 
-    <ul id="chat-messages"></ul>
+    <header>
+    <% include ./partials/header %>
+    </header>
 
-    <input placeholder="username" id="author"></textarea>
-    <input placeholder="message" id="message"></textarea>
-    <button id="send-message">Send</button>
+            <h1>GA Chat</h1>
+            <p>Chat and whiteboard with other GA grads.</p>
+            <p>Click with 2 fingers to clear the whiteboard.</p>
+          <!--   <div id="chat">
+                <div id="authors"></div>
+                -
+                <div id="messages"></div>
+            </div> -->
 
-	<script src="javascripts/sketch.js"></script>
-	<script src="/libraries/p5.js"></script>
+            <ul id="chat-messages"></ul>
 
-    <a href='/logged_in'>Back</a>
+            <input placeholder="username" id="author"></textarea>
+            <input placeholder="message" id="message"></textarea>
+            <button id="send-message">Send</button>
+
+        	<script src="javascripts/sketch.js"></script>
+        	<script src="/libraries/p5.js"></script>
+
+            <a href='/logged_in'></a>
+
 </body>
 </html>
 

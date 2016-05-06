@@ -2,23 +2,46 @@
 <html>
 <head>
   <title>About</title>
-  <style type="text/css" media="screen">
-    body{
-      text-align: center
+
+
+  <% include ./partials/head %>
+</head>
+<body class="container">
+ <style>
+     #blurbdiv{
+      font-size: 19px;
+    }
+    #blurbdiv{
+      margin-bottom: 50px;
+    }
+    #login{
+      font-size: 19px;
     }
   </style>
-</head>
-<body>
-    <h1>Outcomes for Grads</h1>
 
-    <p>So you just graduated from General Assembly</p><br>
-    <p>Want to stay connected with friends</p>
-    <p>Need an instructor to go over your code</p>
-    <p>Want to share post with the GA community</p>
 
-    <p>Then this is the app for you</p>
-    <a href="/logged_in">Back</a> <br>
+    <header>
+    <% include ./partials/about %>
+    </header>
+    <br>
+    <br>
+    <br>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center" id="blurbdiv">
+    <p>So you just graduated from General Assembly and you want to stay connected with friends.  Perhaps you need an instructor to go over your code, or you just want to share post with the GA community.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center" id="blurbdiv">
+    <p>Then this is the app for you.  You already have a Github account, so please use it to:</p>
     <a href="/auth/github">Login/Sign up with GitHub</a>
+  </div>
+</div>
+
+    <footer>
+    <% include ./partials/footer %>
+    </footer>
 </body>
 </html>
 

@@ -3,26 +3,34 @@
   <head>
     <title>Edit Your Question</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <% include ../partials/head %>
   </head>
-  <body>
-    <h1>Make updates to your question below:</h1>
+  <body class="container">
 
-    <form method="post" action="/questions/<%= question._id %>?_method=PATCH">
-      <input type="text" name="title" value="<%=question.title%>">
-      <br>
-      <input name="category" placeholder="category" value="<%=question.category%>"></input>
-      <br>
-      <textarea name="body" rows=20 cols=40><%=question.content%></textarea>
-      <br>
-      <input type=submit value="submit">
-    </form>
-    <a href="/questions/new" id:"addQuestion">Add Question</a>
-    <form method="post" action="/questions/<%= question._id %>?_method=DELETE">
+    <header>
+    <% include ../partials/header %>
+    </header>
 
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2" id="blurbdiv">
+      <h2>Make updates to your question below:</h2>
+      <form method="post" action="/questions/<%= question._id %>?_method=PATCH">
+        <input type="text" name="title" value="<%=question.title%>">
+        <br>
+        <input name="category" placeholder="category" value="<%=question.category%>"></input>
+        <br>
+        <textarea name="body" rows=5 cols=100><%=question.content%></textarea>
+        <br>
+        <input class="btn btn-default btn-sm active" type="submit" value="submit">
+        <a class="btn btn-default btn-sm active" href="/questions/new" id:"addQuestion" role="button">Add Question</a>
+      </form>
+    </div>
+  </div>
 
-      <button type='submit'>Delete</button>
-    </form>
-    <a href="/questions">Back</a>
-    <a href="/">Logout</a>
+    <footer>
+    <br>
+    <% include ../partials/footer %>
+    </footer>
   </body>
 </html>

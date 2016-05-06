@@ -16,7 +16,7 @@ function draw() {
 			clear();
 		}
 		ellipse(mouseX, mouseY, 4, 4);
-		socket.emit('bolita', {x: mouseX, y:mouseY })
+		socket.emit('bolita', {x: mouseX, y:mouseY });
 	}
 }
 
@@ -24,7 +24,7 @@ function draw() {
 socket.on('newBolita', function(data){
 	// console.log(data);
 	ellipse(data.x, data.y, 4, 4);
-})
+});
 
 // message going to be emitted to server via that socket when button is clicked
 var button = document.querySelector('#send-message');
