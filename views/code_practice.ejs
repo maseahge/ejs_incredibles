@@ -4,14 +4,24 @@
 	<title></title>
 	<link rel='stylesheet' href='/libraries/codemirror.css' />
 	<link rel='stylesheet' href='/stylesheets/3024-night.css' />
-
+  <% include ./partials/head %>
 </head>
 <body>
+
+<header>
+<% include ./partials/header %>
+</header>
+
+
 <h3 id="title">Coding Practice</h3>
 <script src="libraries/codemirror.js"></script>
 <script src="libraries/codemirror_javascript.js"></script>
 <script src="javascripts/code_practice.js"></script>
 
 <a href='/logged_in'>Back</a>
+
+    <footer>
+    <% include ./partials/footer %>
+    </footer>
 </body>
 </html>

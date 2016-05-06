@@ -3,34 +3,37 @@
   <head>
     <title>Edit Post</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ./partials/head %>
   </head>
   <body>
-    <h1>U wanna edit this post???</h1>
+    <header>
+      <% include ./partials/header %>
+    </header>
+    <div id="container" class="col-lg-6">
+      <h2>Edit that post!</h2>
 
-    <form method="post" action="/posts/<%= post._id %>?_method=PATCH">
-      <input type="text" name="title" value="<%=post.title%>">
-      <br>
-      <select id="category" name="category">
-      <%
-      var options = [ "new jobs", "brag", "whine", "shoutout", "ramble", "misc" ];
-      for ( var i = 0; i < options.length; i++ )
-      {
-          var selected = ( options[i] ) ? "selected" : "";
-          %><option value="<%=options[ i ] %>" <%=selected %>><%=options[i] %></option><%
-      }
-      %>
-      </select>
-      <br>
-      <textarea name="content" rows=20 cols=40><%=post.content%></textarea>
-      <br>
-      <input type=submit value="submit">
+      <form method="post" action="/posts/<%= post._id %>?_method=PATCH">
+        <input type="text" name="title" value="<%=post.title%>">
+        <br>
+        <select id="category" name="category">
+        <%
+        var options = [ "new jobs", "brag", "whine", "shoutout", "ramble", "misc" ];
+        for ( var i = 0; i < options.length; i++ )
+        {
+            var selected = ( options[i] ) ? "selected" : "";
+            %><option value="<%=options[ i ] %>" <%=selected %>><%=options[i] %></option><%
+        }
+        %>
+        </select>
+        <br>
+        <textarea name="content" rows=20 cols=40><%=post.content%></textarea>
+        <br>
+        <input type=submit value="submit">
+      </form>
+
+    <form method="post" action="/posts/<%= post._id %>?_method=DELETE">
+        <button type='submit'>Delete</button>
     </form>
-
-  <form method="post" action="/posts/<%= post._id %>?_method=DELETE">
-    <% if ( post.userId === post.userId ) { %>
-      <button type='submit'>Delete</button>
-    <%}%>
-  </form>
-
+  </div>
   </body>
 </html>

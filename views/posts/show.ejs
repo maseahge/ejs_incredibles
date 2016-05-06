@@ -3,17 +3,23 @@
   <head>
     <title>View Post</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include ./partials/head %>
   </head>
   <body>
-    <h2>Check out this post lol</h2><br>
-    <b>title:</b> <%= post.title %><br><br>
-    <b>TLDR:</b> <%= post.tldr %><br><br>
-    <b>category:</b> <%= post.category %><br><br>
-    <b>content:</b> <%= post.content %><br><br>
-    <b>submitted by:</b> <%= post.user %><br><br>
-    <% if ( post.user === user.githubUsername ) { %>
-      <a href='/posts/<%= post.id %>/edit'>Edit</a><br>
-    <%}%>
+    <header>
+      <% include ./partials/header %>
+    </header>
+    <div id="showOnePost">
+      <h2>Check out this post!</h2><br>
+      <b>title:</b> <%= post.title %><br><br>
+      <b>TLDR:</b> <%= post.tldr %><br><br>
+      <b>category:</b> <%= post.category %><br><br>
+      <b>content:</b> <%= post.content %><br><br>
+      <b>submitted by:</b> <%= post.user %><br><br>
+      <% if ( post.user === user.githubUsername ) { %>
+        <a href='/posts/<%= post.id %>/edit'>Edit</a><br>
+      <%}%>
+    </div>
     <a href='/posts'>Back</a>
   </body>
 </html>

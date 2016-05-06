@@ -42,6 +42,7 @@ posts.new = function(req, res) {
 };
 
 posts.create = function(req, res) {
+  // console.log(req.user);
   var post = new Post();
   console.log(req.user);
   post.title = req.body.title;
@@ -51,7 +52,9 @@ posts.create = function(req, res) {
     if(err){
       throw err;
     }
+
     post.user = req.user.githubUsername;
+
     post.save(function(err){
       if(err){
         throw err;

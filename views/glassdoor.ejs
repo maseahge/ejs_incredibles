@@ -1,20 +1,32 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Glassdoor Search</title>
   <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
+  <% include ./partials/head %>
 </head>
 <body>
+
+
+  <header>
+  <% include ./partials/header %>
+  </header>
+
   <div id="searchFrom">
-    <input type="text" id="searchBar" placeholder="Image Search">
-  <button id="clicker">Search Companies</button>
+    <input type="text" id="companySearch" placeholder="Company Name">
+    <input type="text" id="location" placeholder="Location">
+  <button id="clicker">Search</button>
   </div>
 
-<div id="showMe"></div>
+<div id="results"></div>
+<!-- <%= results %> -->
 
 <script src="js/app.js"></script>
+
+  <footer>
+    <% include ./partials/footer %>
+    </footer>
 </body>
-</html> -->
-<%= results %>
+</html>
 
 <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>

@@ -8,6 +8,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var gdroutes = require('./routes/gdroutes');
+var flash = require('req-flash');
 
 
 //Quiz routes
@@ -19,14 +20,9 @@ var partials = require('express-partials');
 var methodOverride = require('method-override');
 
 
-
-
 var GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 var GITHUB_CLIENT_SECRET= process.env.GITHUB_CLIENT_SECRET;
 var GITHUB_CALLBACK_URL = process.env.GITHUB_CALLBACK_URL;
-
-
-
 
 
 // Use the GitHubStrategy within Passport.
@@ -116,15 +112,13 @@ app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
 app.use(methodOverride('_method'));
-
-
+app.use(flash({locals: 'flash'}));
 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // setting up routes
 app.use('/', routes);
@@ -136,7 +130,6 @@ app.use('/questions', questionsRoute);
 //Glassdoor API
 app.use('/glassdoor', gdroutes);
 
-
 // GET /auth/github
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in GitHub authentication will involve redirecting
@@ -145,7 +138,6 @@ app.use('/glassdoor', gdroutes);
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] })
   );
-
 
 // GET /auth/github/callback
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -173,6 +165,7 @@ function ensureAuthenticated(req, res, next){
 }
 
 app.use('/posts', ensureAuthenticated);
+app.use('/questions', ensureAuthenticated);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -181,10 +174,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-
-
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -206,6 +196,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

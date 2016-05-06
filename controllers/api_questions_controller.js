@@ -1,5 +1,5 @@
 var Question = require('../models/question');
-var questions = {}
+var questions = {};
 
 questions.index = function(req, res) {
   Question.find({}, function(err, questions) {
@@ -8,7 +8,7 @@ questions.index = function(req, res) {
     }
     res.render('questions/index', {questions: questions});
   });
-}
+};
 
 questions.new = function(req, res) {
   res.render('questions/new', { title: 'Questions' });
@@ -40,14 +40,16 @@ questions.new = function(req, res) {
 
 questions.create = function(req, res) {
   var question = new Question();
+  console.log(req.user);
   question.title = req.body.title;
   question.category = req.body.category;
   question.body = req.body.body;
+  question.user = req.user.githubUsername;
   console.log(req.body);
 
   question.save(function(err, question){
     if(err){
-      throw err;
+      console.log(err);
     }
     res.redirect('/questions');
   });
@@ -61,7 +63,7 @@ questions.show = function(req, res) {
     }
     res.render('questions/show', {question: question});
   });
-}
+};
 
 questions.edit = function(req, res) {
   Question.findById(req.params.id, function(err, question) {
@@ -98,7 +100,6 @@ questions.update = function(req, res) {
   });
 };
 
-
 questions.destroy = function(req, res) {
 Question.findById(req.params.id, function (err, question) {
         if (err) {
@@ -110,26 +111,14 @@ Question.findById(req.params.id, function (err, question) {
                     return console.error(err);
                 } else {
                     //Returning success messages saying it was deleted
-                    console.log('DELETE removing ID: ' + question._id);
-                    res.format({
-                        //HTML returns us back to the main page, or you can create a success page
-                          html: function(){
-                               res.redirect("/questions");
-                         },
-                         //JSON returns the item with the message that is has been deleted
-                        json: function(){
-                               res.json({message : 'deleted',
-                                   item : question
-                               });
-                         }
-                      });
+                    console.log('DELETED');
+                    res.json({message: 'deleted!'})
                 }
             });
         }
     });
-}
+};
 module.exports = questions;
-
 
 // api/questions/:id?vote=up
 // api/questions/:id?vote=down
