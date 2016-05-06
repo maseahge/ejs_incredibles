@@ -38,8 +38,22 @@ a {
   border-width: 2px;
 }
 
-#onePost a:link{ color:darkred; }
-#onePost a:visited{ color:darkred; }
+#onePost:hover {
+  opacity: 0.8;
+}
+
+#onePost a:link{
+  color:darkred;
+}
+
+#onePost a:visited {
+  color: darkred;
+}
+
+#onePost a:hover {
+  color:#FE0034;
+  text-decoration: none;
+}
 
 #container {
   text-align: center;
