@@ -38,12 +38,13 @@ We had a very harmonious and synergistic group.  We collaborated and dove-tailed
 ####Technologies Used:
 <ul>
 <li>GitHub API</li>
-<li>Code Wars API</li>
+<li>Code Mirror</li>
 <li>Node JS</li>
 <li>Express</li>
 <li>Body Parser</li>
 <li>Cookie Parser</li>
 <li>ejs</li>
+<li>Glassdoor API</li>
 <li>Mongoose</li>
 <li>Morgan</li>
 <li>Passport</li>
@@ -56,5 +57,6 @@ We had a very harmonious and synergistic group.  We collaborated and dove-tailed
 [Heroku](https://ejsincredibles.herokuapp.com/)
 
 ####Unsolved Problems/Issues
+Clear out output from glassdoor API each time a new request is sent.
 
 
