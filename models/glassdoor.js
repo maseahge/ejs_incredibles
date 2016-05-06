@@ -7,7 +7,7 @@ var companySearch = function(userIP, userAgent, searchEmp, searchLoc, cb){
   var url = baseUrl + "&userip=" + userIP + "&useragent=" + encodeURIComponent(userAgent) + "&q=" + searchEmp + "&l=" + searchLoc;
   console.log(url);
   request(url, function(err, res, body){
-    console.log(err, res, body);
+    // console.log(err, res, body);
     if(!err && res.statusCode === 200){
       cb(body)
     }
