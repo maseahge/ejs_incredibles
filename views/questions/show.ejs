@@ -4,25 +4,38 @@
    <title>View Question</title>
    <link rel='stylesheet' href='/stylesheets/style.css' />
    <% include ../partials/head %>
+   <style>
+   .title{
+    font-weight: bold;
+    font-size: 21px;
+    }
+    .answer{
+    font-size: 19px;
+    }
+  </style>
  </head>
+
  <body class="container">
      <header>
       <% include ../partials/header %>
     </header>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2" id="blurbdiv">
+   <h2>Here is your question to live:</h2>
+   <p class="title"><%= question.title %></p>
+   <br>
+   <p class="answer"><%= question.body %></p>
+   <br>
+   <p class="answer"><%= question.categories %></p>
+   <br>
+    <a class="btn btn-default btn-sm active" href='/questions/<%= question.id %>/edit' role="button">Edit</a>
+   <a class="btn btn-default btn-sm active" href="/questions" role="button">Back</a>
+  </div>
+</div>
 
-   <h1>Here is your question to live:</h1>
-   <%= question.title %>
-   <br>
-   <%= question.body %>
-   <br>
-   <%= question %>
-   <br>
-   <a href='/questions/<%= question.id %>/edit'>Edit</a>
-   <a href="/questions">Back</a>
-
-   <footer>
-      <% include ../partials/footer %>
-    </footer>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
 
 
  </body>
