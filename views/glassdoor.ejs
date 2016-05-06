@@ -18,15 +18,54 @@
   <button id="clicker">Search</button>
   </div>
 
-<div id="results"></div>
-<!-- <%= results %> -->
+<div id="company">Ratings for: </div>
+<div id="careerOppourtunities">Career Opportunities: </div>
+<div id="compensation">Compensation and Benefits: </div>
+<div id="culture">Culture and Values: </div>
+<div id="workBalance">Work Life Balance: </div>
+<div id="seniorLeadership">Senior Leadership: </div>
 
-<script src="js/app.js"></script>
+<%# results %>
 
   <footer>
     <% include ./partials/footer %>
+    <a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+
     </footer>
+    <script type="text/javascript">
+      function searchGlassdoor(company, location){
+        // query string http://localhost:3000/glassdoor?company=facebook&location=illinois
+
+          $.ajax({
+            method: 'GET',
+            url: '/glassdoor/json?company=' + company + '&location=' + location,
+            success: function(data){
+              console.log(JSON.parse(data))
+              var gd = JSON.parse(data)
+              // $('#company').empty(); can use this to empty out div
+              console.log(gd.response.employers[0].name)
+              $('#company').append(gd.response.employers[0].name)
+              $('#careerOppourtunities').append(gd.response.employers[0].careerOpportunitiesRating)
+              $('#compensation').append(gd.response.employers[0].compensationAndBenefitsRating)
+              $('#culture').append(gd.response.employers[0].cultureAndValuesRating)
+              $('#workBalance').append(gd.response.employers[0].workLifeBalanceRating)
+              $('#seniorLeadership').append(gd.response.employers[0].seniorLeadershipRating)
+              },
+            error: function(response){
+              console.log('error time')
+            }
+        });
+      }
+      $('#clicker').click(function(){
+        console.log('button was clicked')
+        var company = $('#companySearch').val()
+        var location = $('#location').val()
+        $('#companySearch').val('')
+        $('#location').val('')
+        searchGlassdoor(company, location)
+      })
+
+    </script>
 </body>
 </html>
 
-<a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
