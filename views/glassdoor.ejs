@@ -25,10 +25,7 @@
 <div id="workBalance">Work Life Balance: </div>
 <div id="seniorLeadership">Senior Leadership: </div>
 
-
-<!-- <div id="results">Company: </div> -->
 <%# results %>
-
 
   <footer>
     <% include ./partials/footer %>
@@ -45,20 +42,14 @@
             success: function(data){
               console.log(JSON.parse(data))
               var gd = JSON.parse(data)
+              // $('#company').empty(); can use this to empty out div
               console.log(gd.response.employers[0].name)
-
-
-              // $('body').append('' + data)
-
               $('#company').append(gd.response.employers[0].name)
               $('#careerOppourtunities').append(gd.response.employers[0].careerOpportunitiesRating)
               $('#compensation').append(gd.response.employers[0].compensationAndBenefitsRating)
               $('#culture').append(gd.response.employers[0].cultureAndValuesRating)
               $('#workBalance').append(gd.response.employers[0].workLifeBalanceRating)
               $('#seniorLeadership').append(gd.response.employers[0].seniorLeadershipRating)
-        
-              // $('#results').append(gd.response.employers[0].name)
-              // $('#results').html(gd.response.employers[0].careerOpportunitiesRating)
               },
             error: function(response){
               console.log('error time')
@@ -69,6 +60,8 @@
         console.log('button was clicked')
         var company = $('#companySearch').val()
         var location = $('#location').val()
+        $('#companySearch').val('')
+        $('#location').val('')
         searchGlassdoor(company, location)
       })
 

@@ -14,8 +14,6 @@ io.on('connection', function(socket){
 	socket.broadcast.emit
 });
 
-
-
 io.on('connection', function(socket){
 	// when we emit, bein sent to client
 	socket.on('chat', function(data){
@@ -23,11 +21,5 @@ io.on('connection', function(socket){
 		io.emit('message-received', data)
 	});
 })
- // $('_').submit(function(){
- //   socket.emit('chat message', $('#message').val());
- //   $('#message').val('');
- //   return false;
- // });
-
 
 module.exports = io;
