@@ -7,11 +7,11 @@ $('body').on('click', '#deleteQuestion', function(){
     url: '/questions/'+id,
     type: 'DELETE',
     success: function(){
-      console.log('deleted?')
+      console.log('deleted?');
       stupid.parent().hide();
     }
-  })
+  });
 
 
-})
+});
 

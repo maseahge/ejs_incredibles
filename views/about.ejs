@@ -7,9 +7,15 @@
       text-align: center
     }
   </style>
+  <% include ./partials/head %>
 </head>
 <body>
     <h1>Outcomes for Grads</h1>
+
+    <header>
+    <% include ./partials/header %>
+    </header>
+
 
     <p>So you just graduated from General Assembly</p><br>
     <p>Want to stay connected with friends</p>
@@ -19,6 +25,10 @@
     <p>Then this is the app for you</p>
     <a href="/logged_in">Back</a> <br>
     <a href="/auth/github">Login/Sign up with GitHub</a>
+
+    <footer>
+    <% include ./partials/footer %>
+    </footer>
 </body>
 </html>
 

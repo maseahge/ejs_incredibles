@@ -3,8 +3,15 @@
 <head>
   <title>Add Question to Database</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <% include ./partials/head %>
 </head>
 <body>
+
+    <header>
+      <% include ./partials/header %>
+    </header>
+
+
   <form method="post" action="/questions">
       <input type="text" name="title" placeholder="title">
       <br>
@@ -17,6 +24,11 @@
   <br>
   <br>
   <a href="/questions">Back</a>
+
+    <footer>
+      <% include ./partials/footer %>
+    </footer>
+
 
 </body>
 </html>
