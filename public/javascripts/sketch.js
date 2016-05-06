@@ -14,6 +14,7 @@ function draw() {
 			clear();
 		}
 		ellipse(mouseX, mouseY, 4, 4);
+		//send message named bolita as js object
 		socket.emit('bolita', {x: mouseX, y:mouseY });
 	}
 }

@@ -3,13 +3,13 @@
 console.log('server working');
 var io = require('socket.io')();
 
-// event listeners for canvas
+// event listeners for new connection
 io.on('connection', function(socket){
 	// console.log(io);
 	console.log('a new user connection:' + socket.id);
-	socket.on('bolita', function(data){
+	socket.on('bolita', function(data){ //if message named bolita run function
 		// console.log(data);
-		io.emit('newBolita', data) 
+		io.emit('newBolita', data) //function sends out message
 	})
 	socket.broadcast.emit
 });
